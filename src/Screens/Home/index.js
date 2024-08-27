@@ -1,22 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
-  View,
-  Text,
-  ActivityIndicator,
   StyleSheet,
   PermissionsAndroid,
   Platform,
   ImageBackground,
+  Image,
+  StatusBar,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherSlice/weatherApi';
 import {useFocusEffect} from '@react-navigation/native';
-import Loader from '../../Components/Loader';
+import Loader from '../../Components/Common/Loader';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {Images} from '../../Assets/Images';
+import MessageAlert from '../../Components/Common/MessageAlert';
+import Icons from '../../Assets/Icons';
+import WeatherComponent from '../../Components/HomeComponents/WeatherComponent';
+import ThemeColors from '../../Utils/Colors';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState({lat: null, lon: null});
@@ -29,16 +32,7 @@ const WeatherScreen = () => {
     },
   );
 
-  useFocusEffect(
-    React.useCallback(() => {
-      requestLocation();
-      if (location.lat && location.lon) {
-        refetch();
-      }
-    }, [location]),
-  );
-
-  const requestLocation = async () => {
+  const requestLocation = useCallback(async () => {
     if (Platform.OS === 'android') {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -58,6 +52,10 @@ const WeatherScreen = () => {
       }
     }
 
+    Geolocation.setRNConfiguration({
+      locationProvider: Platform.OS === 'android' ? 'playServices' : 'auto',
+    });
+
     Geolocation.getCurrentPosition(
       position => {
         const {latitude, longitude} = position.coords;
@@ -74,63 +72,72 @@ const WeatherScreen = () => {
             {
               enableHighAccuracy: false,
               timeout: 15000,
-              maximumAge: 10000,
+              maximumAge: 5000,
             },
           );
         } else {
-          setLocationError(error.message);
+          console.log(error.code);
+          if (error.code == '2') {
+            setLocationError('Please Turn ON Location');
+          } else {
+            setLocationError(error.message);
+          }
         }
       },
       {
         enableHighAccuracy: true,
-        timeout: 25000,
-        maximumAge: 10000,
+        timeout: 15000,
+        maximumAge: 5000,
       },
     );
-  };
+  }, []);
 
-  if (isLoading) {
-    return (
-      <ImageBackground source={Images.Background} style={styles.container}>
-        <Loader
-          size={'large'}
-          color={'#000'}
-          LoadingText={'Loading weather data'}
-        />
-      </ImageBackground>
-    );
-  }
+  useFocusEffect(
+    useCallback(() => {
+      requestLocation();
+    }, [requestLocation]),
+  );
+
+  useEffect(() => {
+    if (location.lat && location.lon) {
+      refetch();
+    }
+  }, [location, refetch]);
 
   if (error || locationError) {
     return (
       <ImageBackground source={Images.Background} style={styles.container}>
-        <Text style={styles.title}>
-          Error: {error?.message || locationError}
-        </Text>
+        <MessageAlert
+          Icon={Icons.alertIcon}
+          MessageText={error?.message || locationError}
+        />
+        <Image source={Images.House} style={styles.houseImg} />
+      </ImageBackground>
+    );
+  }
+
+  if (isLoading || !location.lat || !location.lon) {
+    return (
+      <ImageBackground source={Images.Background} style={styles.container}>
+        <Loader
+          size={'large'}
+          color={ThemeColors.White}
+          LoadingText={
+            isLoading ? 'Loading weather data' : 'Waiting for location'
+          }
+        />
+        <Image source={Images.House} style={styles.houseImg} />
       </ImageBackground>
     );
   }
 
   return (
-    <ImageBackground source={Images.Background} style={styles.container}>
-      {data ? (
-        <>
-          <Text style={styles.title}>Weather in Your Location</Text>
-          <Text style={styles.title}>
-            Temperature: {(data.main.temp - 273.15).toFixed(2)}°C
-          </Text>
-          <Text style={styles.title}>
-            Weather: {data.weather[0].description}
-          </Text>
-          <Text style={styles.title}>Location: {data.name}</Text>
-        </>
-      ) : (
-        <Loader
-          size={50}
-          color={'#0000ff'}
-          LoadingText={'Waiting for location'}
-        />
-      )}
+    <ImageBackground
+      source={Images.Background}
+      style={[styles.container, {paddingTop: data ? 80 : 170}]}>
+      <StatusBar hidden={true} backgroundColor={ThemeColors.Purple} />
+      {data && <WeatherComponent data={data} />}
+      <Image source={Images.House} style={styles.houseImg} />
     </ImageBackground>
   );
 };
@@ -142,18 +149,15 @@ const styles = StyleSheet.create({
     flex: 1,
     height: responsiveHeight(100),
     width: responsiveWidth(100),
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 60,
+    paddingTop: 180,
   },
-  imgbg: {
-    justifyContent: 'flex-start',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: 'black',
-    fontFamily: 'sans-serif',
+  houseImg: {
+    height: responsiveHeight(35),
+    width: responsiveWidth(80),
+    opacity: 0.95,
   },
 });

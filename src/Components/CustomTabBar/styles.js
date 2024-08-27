@@ -4,16 +4,17 @@ import {
   responsiveWidth as rw,
   responsiveFontSize as rf,
 } from 'react-native-responsive-dimensions';
+import ThemeColors from '../../Utils/Colors';
 
 export const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
-    backgroundColor: '#362e6b',
+    backgroundColor: ThemeColors.Purple,
     height: rh(9),
     alignItems: 'center',
     justifyContent: 'space-around',
     borderTopWidth: 0.1,
-    borderColor: 'white',
+    borderColor: ThemeColors.White,
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     position: 'absolute',
@@ -30,16 +31,16 @@ export const styles = StyleSheet.create({
   icon: {
     width: rw(5.4),
     height: rh(5.5),
-    tintColor: 'white',
+    tintColor: ThemeColors.White,
   },
   iconFocused: {
-    tintColor: '#7582F4',
+    tintColor: ThemeColors.LightPurple,
   },
   plusButtonContainer: {
     width: rw(18.7),
     height: rw(18.7),
     borderRadius: 35,
-    backgroundColor: '#7582F4',
+    backgroundColor: ThemeColors.LightPurple,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 5,
@@ -49,7 +50,7 @@ export const styles = StyleSheet.create({
     width: rw(16.7),
     height: rw(16.7),
     borderRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: ThemeColors.White,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -65,6 +66,6 @@ export const styles = StyleSheet.create({
   plusIcon: {
     width: rw(6),
     height: rh(5.3),
-    tintColor: '#48319D',
+    tintColor: ThemeColors.Purple2,
   },
 });

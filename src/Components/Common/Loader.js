@@ -1,10 +1,11 @@
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import ThemeColors from '../../Utils/Colors';
 
 const Loader = ({size, LoadingText}) => {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size={size} color={'#fff'} />
+      <ActivityIndicator size={size} color={ThemeColors.White} />
       <Text style={styles.title}>{LoadingText}</Text>
     </View>
   );
@@ -14,23 +15,25 @@ export default Loader;
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 30,
-    backgroundColor: '#362e6b',
+    borderRadius: 20,
+    backgroundColor: ThemeColors.Purple,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 25,
-    gap: 15,
+    paddingHorizontal: 25,
+    paddingVertical: 20,
+    gap: 12,
     elevation: 15,
-    shadowColor: '#000',
+    shadowColor: ThemeColors.Black,
     shadowOffset: {
       height: 5,
       width: 5,
     },
+    opacity: 0.9,
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: ThemeColors.Black,
     fontFamily: 'sans-serif',
   },
 });

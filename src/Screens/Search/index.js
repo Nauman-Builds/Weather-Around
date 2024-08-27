@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from '../Home/styles';
-import WeatherComponent from '../../Components/HomeComponents';
+import WeatherComponent from '../../Components/HomeComponents/WeatherComponent';
 import {Images} from '../../Assets/Images';
 
 const SearchScreen = () => {
