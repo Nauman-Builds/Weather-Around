@@ -5,10 +5,9 @@ import {
   Platform,
   ImageBackground,
   Image,
-  StatusBar,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherSlice/weatherApi';
+import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
 import {useFocusEffect} from '@react-navigation/native';
 import Loader from '../../Components/Common/Loader';
 import {
@@ -31,6 +30,27 @@ const WeatherScreen = () => {
       skip: !location.lat || !location.lon,
     },
   );
+
+  // const {
+  //   data: LocationKeyData,
+  //   error: LocationKeyError,
+  //   isLoading: LocationKeyLoading,
+  //   refetch: LocationKeyRefetch,
+  // } = useGetLocationKeyByCoordsQuery(
+  //   {lat: location.lat, lon: location.lon},
+  //   {
+  //     skip: !location.lat || !location.lon,
+  //   },
+  // );
+
+  // const {
+  //   data: CurrentWeatherData,
+  //   error: CurrentWeatherError,
+  //   isLoading: CurrentWeatherLoading,
+  //   refetch: CurrentWeatherRefetch,
+  // } = useGetCurrentWeatherByKeyQuery(LocationKeyData?.Key, {
+  //   skip: !LocationKeyData?.Key,
+  // });
 
   const requestLocation = useCallback(async () => {
     if (Platform.OS === 'android') {
@@ -71,12 +91,11 @@ const WeatherScreen = () => {
             error => setLocationError(error.message),
             {
               enableHighAccuracy: false,
-              timeout: 15000,
+              timeout: 10000,
               maximumAge: 5000,
             },
           );
         } else {
-          console.log(error.code);
           if (error.code == '2') {
             setLocationError('Please Turn ON Location');
           } else {
@@ -99,14 +118,22 @@ const WeatherScreen = () => {
   );
 
   useEffect(() => {
+    // if (location.lat && location.lon) {
+    //   LocationKeyRefetch();
+    // }
+    // if (LocationKeyData?.Key) {
+    //   CurrentWeatherRefetch();
+    // }
     if (location.lat && location.lon) {
       refetch();
     }
   }, [location, refetch]);
 
-  if (error || locationError) {
+  if (locationError || error) {
     return (
-      <ImageBackground source={Images.Background} style={styles.container}>
+      <ImageBackground
+        source={Images.Background}
+        style={[styles.container, {paddingTop: 180}]}>
         <MessageAlert
           Icon={Icons.alertIcon}
           MessageText={error?.message || locationError}
@@ -118,7 +145,9 @@ const WeatherScreen = () => {
 
   if (isLoading || !location.lat || !location.lon) {
     return (
-      <ImageBackground source={Images.Background} style={styles.container}>
+      <ImageBackground
+        source={Images.Background}
+        style={[styles.container, {paddingTop: 180}]}>
         <Loader
           size={'large'}
           color={ThemeColors.White}
@@ -132,10 +161,7 @@ const WeatherScreen = () => {
   }
 
   return (
-    <ImageBackground
-      source={Images.Background}
-      style={[styles.container, {paddingTop: data ? 80 : 170}]}>
-      <StatusBar hidden={true} backgroundColor={ThemeColors.Purple} />
+    <ImageBackground source={Images.Background} style={styles.container}>
       {data && <WeatherComponent data={data} />}
       <Image source={Images.House} style={styles.houseImg} />
     </ImageBackground>
@@ -153,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 60,
-    paddingTop: 180,
+    paddingTop: 110,
   },
   houseImg: {
     height: responsiveHeight(35),

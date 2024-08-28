@@ -5,6 +5,7 @@ import DetailScreen from '../Screens/Details';
 import SearchScreen from '../Screens/Search';
 import {NavigationContainer} from '@react-navigation/native';
 import CustomTabBar from '../Components/CustomTabBar';
+import {StatusBar} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,6 +36,7 @@ const Tabs = () => {
 const MainNavigation = () => {
   return (
     <NavigationContainer>
+      <StatusBar translucent backgroundColor="transparent" />
       <Tabs />
     </NavigationContainer>
   );

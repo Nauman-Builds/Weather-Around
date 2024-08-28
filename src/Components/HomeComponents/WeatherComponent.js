@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import ThemeColors from '../../Utils/Colors';
+import {responsiveFontSize as rf} from 'react-native-responsive-dimensions';
 
 const WeatherComponent = ({data}) => {
   return (
@@ -33,28 +34,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   city: {
-    fontSize: 40,
+    fontSize: rf(5),
     color: ThemeColors.White,
     fontWeight: '300',
   },
   temperature: {
-    fontSize: 100,
+    fontSize: rf(12.5),
     color: ThemeColors.White,
     fontWeight: '200',
   },
   condition: {
-    fontSize: 24,
+    fontSize: rf(2.96),
     color: ThemeColors.Gray,
     fontWeight: '300',
   },
   highLowContainer: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 3,
   },
   highLow: {
-    fontSize: 24,
-    color: ThemeColors.Gray,
-    fontWeight: '300',
+    fontSize: rf(2.96),
+    color: ThemeColors.White,
+    fontWeight: 'semibold',
     marginHorizontal: 10,
   },
 });

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: ThemeColors.Black,
+    color: ThemeColors.White,
     fontFamily: 'sans-serif',
   },
 });
