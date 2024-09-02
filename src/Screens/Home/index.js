@@ -1,24 +1,20 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {
-  StyleSheet,
   PermissionsAndroid,
   Platform,
   ImageBackground,
   Image,
 } from 'react-native';
-import Geolocation from '@react-native-community/geolocation';
-import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
-import {useFocusEffect} from '@react-navigation/native';
-import Loader from '../../Components/Common/Loader';
-import {
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
-import {Images} from '../../Assets/Images';
-import MessageAlert from '../../Components/Common/MessageAlert';
 import Icons from '../../Assets/Icons';
-import WeatherComponent from '../../Components/HomeComponents/WeatherComponent';
+import Images from '../../Assets/Images';
+import styles from './styles';
 import ThemeColors from '../../Utils/Colors';
+import Geolocation from '@react-native-community/geolocation';
+import {useFocusEffect} from '@react-navigation/native';
+import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
+import Loader from '../../Components/Common/Loader';
+import MessageAlert from '../../Components/Common/MessageAlert';
+import WeatherComponent from '../../Components/HomeComponents/WeatherComponent';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState({lat: null, lon: null});
@@ -169,21 +165,3 @@ const WeatherScreen = () => {
 };
 
 export default WeatherScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: responsiveHeight(100),
-    width: responsiveWidth(100),
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingBottom: 60,
-    paddingTop: 110,
-  },
-  houseImg: {
-    height: responsiveHeight(35),
-    width: responsiveWidth(80),
-    opacity: 0.95,
-  },
-});

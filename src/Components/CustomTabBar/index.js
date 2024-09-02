@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import Icons from '../../Assets/Icons';
-import {Images} from '../../Assets/Images';
+import Images from '../../Assets/Images';
 import {styles} from './styles';
 
 const CustomTabBar = ({state, descriptors, navigation}) => {
   return (
-    <View style={styles.tabContainer}>
+    <ImageBackground source={Images.TabFrame} style={styles.tabContainer}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const isFocused = state.index === index;
@@ -68,7 +68,7 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
           </TouchableOpacity>
         );
       })}
-    </View>
+    </ImageBackground>
   );
 };
 
