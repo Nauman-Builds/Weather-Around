@@ -4,6 +4,8 @@ const Images = {
   CenterButtonBack: require('./CenterButtonBack.png'),
   TabFrame: require('./TabFrame.png'),
   WeatherCardBack: require('./WeatherCardBack.png'),
+  Sunrise: require('./Sunrise.png'),
+  WindMeter: require('./WindMeter.png'),
 };
 
 export default Images;

@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import Icons from '../../Assets/Icons';
 import Images from '../../Assets/Images';
@@ -15,7 +16,7 @@ import {
   responsiveFontSize as rf,
 } from 'react-native-responsive-dimensions';
 import ThemeColors from '../../Utils/Colors';
-import {Fonts} from '../../Utils/Fonts';
+import Fonts from '../../Utils/Fonts';
 import {useGetWeatherByCityQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
 import Loader from '../Common/Loader';
 import MessageAlert from '../Common/MessageAlert';
@@ -36,7 +37,17 @@ const WeatherCard = ({cityName, onPress}) => {
   }
 
   if (error) {
-    return <MessageAlert Icon={Icons.alertIcon} MessageText={error?.message} />;
+    if (error?.data?.message === 'city not found') {
+      return ToastAndroid.show('City Not Found', ToastAndroid.SHORT);
+    } else {
+      return (
+        <MessageAlert
+          Icon={Icons.alertIcon}
+          MessageText={error?.data?.message?.toUpperCase()}
+          bodyStyle={styles.card}
+        />
+      );
+    }
   }
 
   const temperature = data?.main?.temp
@@ -74,20 +85,21 @@ const WeatherCard = ({cityName, onPress}) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: rw(90),
-    height: rh(22.4),
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    gap: 10,
+    width: rw(87),
+    height: rh(21.7),
+    marginVertical: rh(1.25),
+    paddingHorizontal: 19,
+    paddingVertical: 14,
+    gap: rh(1.1),
     alignSelf: 'center',
   },
   temperature: {
     color: ThemeColors.White,
-    fontSize: rf(8.5),
+    fontSize: rf(8.3),
     fontFamily: Fonts.ExtraLight,
   },
   tempDetails: {
-    gap: 3,
+    gap: rh(0.37),
   },
   highLow: {
     color: ThemeColors.White,
@@ -100,17 +112,18 @@ const styles = StyleSheet.create({
   },
   weatherIconContainer: {
     position: 'absolute',
-    right: 13,
-    top: -15,
+    right: 12,
+    top: -10,
     alignItems: 'center',
   },
   weatherIcon: {
     width: rw(36),
-    height: rh(19),
+    height: rh(18),
   },
   weatherDescription: {
     color: ThemeColors.White,
-    fontSize: rf(2.0),
+    fontSize: rf(1.9),
+    fontFamily: Fonts.ExtraLight,
   },
 });
 

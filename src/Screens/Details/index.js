@@ -1,13 +1,15 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Header from '../../Components/Common/Header';
+import SunriseSunsetCard from '../../Components/DetailsComponents/SunriseSunsetCard';
+import AirQualityCard from '../../Components/DetailsComponents/AirQualityCard';
+import UVIndexCard from '../../Components/DetailsComponents/UVIndexCard';
+import WindsCard from '../../Components/DetailsComponents/WindCard';
+import HumidityCard from '../../Components/DetailsComponents/HumidityCard';
+import RainCard from '../../Components/DetailsComponents/RainCard';
+import WeatherCard from '../../Components/SearchComponents/WeatherCard';
+import VisibilityCard from '../../Components/DetailsComponents/VisibilityCard';
 
 const DetailScreen = () => {
   return (
@@ -16,17 +18,28 @@ const DetailScreen = () => {
       style={styles.container}
       start={{x: 0.0, y: 0.0}}
       end={{x: 0.9, y: 1.0}}>
-      <View style={styles.header}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity>
-            <Icon name="chevron-back-sharp" size={31} color="#fff" />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Weather Details</Text>
+      <Header Title={'Weather Details'} />
+      <ScrollView
+        style={{borderRadius: 10}}
+        contentContainerStyle={styles.cardsContainer}>
+        <AirQualityCard />
+        <View style={styles.background}>
+          <UVIndexCard />
+          <SunriseSunsetCard />
         </View>
-        <TouchableOpacity>
-          <Icon name="ellipsis-horizontal-circle" size={33} color="#fff" />
-        </TouchableOpacity>
-      </View>
+        <View style={styles.background}>
+          <WindsCard speed={9.7} direction="N" />
+          <HumidityCard />
+        </View>
+        <View style={styles.background}>
+          <RainCard />
+          <VisibilityCard />
+        </View>
+        <View style={styles.background}>
+          <RainCard />
+          <HumidityCard />
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
 };
@@ -34,47 +47,19 @@ const DetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#4B0082',
-    paddingHorizontal: 20,
-    paddingTop: 45,
+    paddingTop: 35,
+    alignItems: 'center',
+  },
+  cardsContainer: {
+    paddingBottom: 110,
+    marginTop: 10,
+    alignItems: 'center',
+    gap: 12,
   },
   background: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     gap: 10,
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 27,
-    fontWeight: '300',
-  },
-  searchContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#3A0A66',
-    borderRadius: 10,
-    marginTop: 20,
-    marginHorizontal: 4,
-    paddingHorizontal: 10,
-    height: 40,
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    color: '#fff',
+    justifyContent: 'center',
   },
 });
 

@@ -1,12 +1,12 @@
-export const Fonts = {
-  Bold: 'RobotoSlab-Bold',
-  ExtraBold: 'RobotoSlab-ExtraBold',
-  ExtraLight: 'RobotoSlab-ExtraLight',
-  Light: 'RobotoSlab-Light',
-  Medium: 'RobotoSlab-Medium',
-  Regular: 'RobotoSlab-Regular',
-  SemiBold: 'RobotoSlab-SemiBold',
-  Thin: 'RobotoSlab-Thin',
-  VariableFont_wght: 'RobotoSlab-VariableFont_wght',
-  Black: 'RobotoSlab-Black',
+const Fonts = {
+  Bold: 'PlaypenSans-Bold',
+  ExtraBold: 'PlaypenSans-ExtraBold',
+  ExtraLight: 'PlaypenSans-ExtraLight',
+  Light: 'PlaypenSans-Light',
+  Medium: 'PlaypenSans-Medium',
+  Regular: 'PlaypenSans-Regular',
+  SemiBold: 'PlaypenSans-SemiBold',
+  Thin: 'PlaypenSans-Thin',
 };
+
+export default Fonts;
