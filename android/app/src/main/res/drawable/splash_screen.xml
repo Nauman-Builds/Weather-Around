@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Set a gradient background -->
+    <item>
+        <shape>
+            <gradient
+                android:angle="45"
+                android:centerColor="@color/color_2"
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="@color/color_3"
+                android:startColor="@color/color_1"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item
+        android:width="190dp"
+        android:height="190dp"
+        android:bottom="48dp"
+        android:drawable="@drawable/app_logo"
+        android:gravity="center" />
+    <item
+        android:width="180dp"
+        android:height="18.5dp"
+        android:drawable="@drawable/app_name"
+        android:gravity="center"
+        android:top="135dp" />
+</layer-list>

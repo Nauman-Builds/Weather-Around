@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/Ionicons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
+import Icons from '../../Assets/Icons';
 
 const HumidityCard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="sunny-sharp" size={18} color={ThemeColors.Gray1} />
+        <Image source={Icons.humidityIcon} style={styles.humidityIcon} />
         <Text style={styles.label}>HUMIDITY</Text>
       </View>
       <Text style={styles.level}>90%</Text>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center',
-    gap: 7,
+    gap: 6,
   },
   label: {
     color: ThemeColors.Gray1,
@@ -57,6 +57,11 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Regular,
     fontSize: responsiveFontSize(1.7),
     textAlign: 'center',
+  },
+  humidityIcon: {
+    height: responsiveHeight(1.8),
+    width: responsiveWidth(4.55),
+    marginTop: 2,
   },
 });
 

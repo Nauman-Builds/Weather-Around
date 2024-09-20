@@ -27,7 +27,7 @@ const SunriseSunsetCard = () => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(22.2),
-    width: responsiveWidth(44),
+    width: responsiveWidth(44.2),
     backgroundColor: ThemeColors.DarkBlue,
     borderColor: ThemeColors.LightPurple,
     paddingVertical: 14,

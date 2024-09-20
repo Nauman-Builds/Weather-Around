@@ -10,14 +10,14 @@ import {
 } from 'react-native-responsive-dimensions';
 import Fonts from '../../Utils/Fonts';
 
-const AirQualityCard = () => {
+const AirQualityCard = ({CurrentAirQuality}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
         <Icons name="dots-hexagon" size={18} color={ThemeColors.Gray1} />
         <Text style={styles.label}>AIR QUALITY</Text>
       </View>
-      <Text style={styles.riskLevel}>3-Low Health Risk</Text>
+      <Text style={styles.riskLevel}>{CurrentAirQuality}</Text>
       <LinearGradient
         colors={['#3D89D4', '#AB3FC6', '#F23D57']}
         start={{x: 0, y: 0.5}}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import Images from '../../Assets/Images';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icoon from 'react-native-vector-icons/FontAwesome6';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -9,16 +9,28 @@ import {
 } from 'react-native-responsive-dimensions';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
+import Icons from '../../Assets/Icons';
 
-const WindsCard = ({speed = 9.7, direction = 'N'}) => {
+const PressureCard = ({PressureCount = 1100}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="wind" size={18} color={ThemeColors.Gray1} />
-        <Text style={styles.label}>WIND</Text>
+        <Icon name="gauge" size={20} color={ThemeColors.Gray1} />
+        <Text style={styles.label}>PRESSURE</Text>
       </View>
-      <Image source={Images.WindMeter} style={styles.sunriseImage} />
-      <Text style={styles.windSpeed}>{speed} km/h</Text>
+      <Image source={Icons.pressure} style={styles.sunriseImage} />
+      <View style={styles.PressureCont}>
+        <Icoon
+          name={
+            PressureCount > 1000
+              ? 'arrow-down-wide-short'
+              : 'arrow-up-wide-short'
+          }
+          size={20}
+          color={ThemeColors.Gray1}
+        />
+        <Text style={styles.windSpeed}>1002 mb</Text>
+      </View>
     </View>
   );
 };
@@ -39,17 +51,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
   },
   label: {
     color: ThemeColors.Gray1,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },
-  windSpeed: {
-    width: responsiveWidth(13),
+  PressureCont: {
+    width: responsiveWidth(28),
     position: 'absolute',
-    top: responsiveHeight(8.8),
+    top: responsiveHeight(9),
+    alignItems: 'center',
+    gap: 2,
+  },
+  windSpeed: {
     textAlign: 'center',
     color: ThemeColors.White,
     fontSize: responsiveFontSize(2.1),
@@ -57,8 +73,8 @@ const styles = StyleSheet.create({
   },
   sunriseImage: {
     height: responsiveHeight(16.5),
-    width: responsiveWidth(36.3),
+    width: responsiveWidth(35),
   },
 });
 
-export default WindsCard;
+export default PressureCard;

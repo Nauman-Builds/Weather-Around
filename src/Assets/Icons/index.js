@@ -11,6 +11,8 @@ const Icons = {
   sunCloudMidRainIcon: require('./SunMidRain.png'),
   tornadoIcon: require('./Tornado.png'),
   alertIcon: require('./AlertIcon.png'),
+  pressure: require('./Pressure.png'),
+  humidityIcon: require('./HumidityIcon.png'),
 };
 
 export default Icons;

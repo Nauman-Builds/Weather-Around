@@ -10,6 +10,8 @@ import HumidityCard from '../../Components/DetailsComponents/HumidityCard';
 import RainCard from '../../Components/DetailsComponents/RainCard';
 import WeatherCard from '../../Components/SearchComponents/WeatherCard';
 import VisibilityCard from '../../Components/DetailsComponents/VisibilityCard';
+import FeelsLikeCard from '../../Components/DetailsComponents/FeelsLikeCard';
+import PressureCard from '../../Components/DetailsComponents/PressureCard';
 
 const DetailScreen = () => {
   return (
@@ -21,23 +23,24 @@ const DetailScreen = () => {
       <Header Title={'Weather Details'} />
       <ScrollView
         style={{borderRadius: 10}}
-        contentContainerStyle={styles.cardsContainer}>
-        <AirQualityCard />
+        contentContainerStyle={styles.cardsContainer}
+        showsVerticalScrollIndicator={false}>
+        <AirQualityCard CurrentAirQuality={'3-Low Health Risk'} />
         <View style={styles.background}>
           <UVIndexCard />
           <SunriseSunsetCard />
         </View>
         <View style={styles.background}>
           <WindsCard speed={9.7} direction="N" />
+          <RainCard />
+        </View>
+        <View style={styles.background}>
+          <FeelsLikeCard />
           <HumidityCard />
         </View>
         <View style={styles.background}>
-          <RainCard />
           <VisibilityCard />
-        </View>
-        <View style={styles.background}>
-          <RainCard />
-          <HumidityCard />
+          <PressureCard />
         </View>
       </ScrollView>
     </LinearGradient>

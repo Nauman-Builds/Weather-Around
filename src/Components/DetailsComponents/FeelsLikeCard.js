@@ -5,18 +5,18 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 
-const VisibilityCard = () => {
+const FeelsLikeCard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="eye" size={20} color={ThemeColors.Gray1} />
-        <Text style={styles.label}>VISIBILITY</Text>
+        <Icon name="temperature-low" size={18} color={ThemeColors.Gray1} />
+        <Text style={styles.label}>FEELS LIKE</Text>
       </View>
-      <Text style={styles.level}>8km</Text>
+      <Text style={styles.level}>50°</Text>
       <Text style={styles.sunset}>Similar to the actual temperature</Text>
     </View>
   );
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center',
-    gap: 7,
+    gap: 6,
   },
   label: {
     color: ThemeColors.Gray1,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   level: {
     color: ThemeColors.White,
-    fontSize: responsiveFontSize(4.3),
+    fontSize: responsiveFontSize(4.5),
     fontFamily: Fonts.Light,
     alignSelf: 'center',
   },
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VisibilityCard;
+export default FeelsLikeCard;
