@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingBottom: 63,
-    paddingTop: 115,
+    paddingBottom: 65,
+    paddingTop: 110,
   },
   houseImg: {
     height: responsiveHeight(35),

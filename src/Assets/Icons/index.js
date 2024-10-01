@@ -1,4 +1,5 @@
 const Icons = {
+  appLogo: require('./AppLogo.png'),
   listIcon: require('./List.png'),
   menuIcon: require('./Menu.png'),
   moonCloudFastWindIcon: require('./moonWind.png'),
@@ -13,6 +14,15 @@ const Icons = {
   alertIcon: require('./AlertIcon.png'),
   pressure: require('./Pressure.png'),
   humidityIcon: require('./HumidityIcon.png'),
+  snow: require('./snow.png'),
+  rain: require('./Rain.png'),
+  rain3D: require('./rain3D.png'),
+  clearDay: require('./clearDay.png'),
+  clearNight: require('./clearNight.png'),
+  cloudy: require('./cloudy.png'),
+  Wind: require('./Wind.png'),
+  partlyCloudynDay: require('./partlyCloudynDay.png'),
+  fog: require('./foggy.png'),
 };
 
 export default Icons;

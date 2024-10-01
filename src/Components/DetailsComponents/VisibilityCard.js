@@ -8,16 +8,17 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
+import {getTitleByVisibility} from '../../Utils/WeatherConditions';
 
-const VisibilityCard = () => {
+const VisibilityCard = ({visibility}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="eye" size={20} color={ThemeColors.Gray1} />
+        <Icon name="eye" size={20} color={ThemeColors.Gray} />
         <Text style={styles.label}>VISIBILITY</Text>
       </View>
-      <Text style={styles.level}>8km</Text>
-      <Text style={styles.sunset}>Similar to the actual temperature</Text>
+      <Text style={styles.level}>{visibility?.toFixed(1)}km</Text>
+      <Text style={styles.sunset}>{getTitleByVisibility(visibility)}</Text>
     </View>
   );
 };
@@ -25,7 +26,7 @@ const VisibilityCard = () => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(22),
-    width: responsiveWidth(44),
+    width: responsiveWidth(43),
     backgroundColor: ThemeColors.DarkBlue,
     borderColor: ThemeColors.LightPurple,
     paddingVertical: 15,
@@ -42,21 +43,22 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   label: {
-    color: ThemeColors.Gray1,
+    color: ThemeColors.Gray,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },
   level: {
     color: ThemeColors.White,
-    fontSize: responsiveFontSize(4.3),
+    fontSize: responsiveFontSize(4.1),
     fontFamily: Fonts.Light,
     alignSelf: 'center',
   },
   sunset: {
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray1,
     fontFamily: Fonts.Regular,
     fontSize: responsiveFontSize(1.7),
     textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 

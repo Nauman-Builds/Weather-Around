@@ -9,17 +9,20 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import {convertUnixToTime} from '../../Utils/TimeConversion';
 
-const SunriseSunsetCard = () => {
+const SunriseSunsetCard = ({sunrise, sunset}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="sunrise" size={18} color={ThemeColors.Gray1} />
+        <Icon name="sunrise" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>SUNRISE</Text>
       </View>
-      <Text style={styles.time}>5:28 AM</Text>
+      <Text style={styles.time}>{convertUnixToTime(sunrise)}</Text>
       <Image source={Images.Sunrise} style={styles.sunriseImage} />
-      <Text style={styles.sunset}>Sunset: 7:25PM</Text>
+      <Text style={styles.sunset}>{`Sunset: ${convertUnixToTime(
+        sunset,
+      )}`}</Text>
     </View>
   );
 };
@@ -27,7 +30,7 @@ const SunriseSunsetCard = () => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(22.2),
-    width: responsiveWidth(44.2),
+    width: responsiveWidth(43.2),
     backgroundColor: ThemeColors.DarkBlue,
     borderColor: ThemeColors.LightPurple,
     paddingVertical: 14,
@@ -43,22 +46,23 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   label: {
-    color: ThemeColors.Gray1,
+    color: ThemeColors.Gray,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },
   time: {
     color: ThemeColors.White,
-    fontSize: responsiveFontSize(3.9),
+    fontSize: responsiveFontSize(3.7),
     fontFamily: Fonts.Light,
-    marginVertical: 2,
+    marginTop: 5,
+    marginBottom: 1,
   },
   sunriseImage: {
     height: responsiveHeight(6.7),
-    width: responsiveWidth(43),
+    width: responsiveWidth(42),
   },
   sunset: {
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray1,
     fontFamily: Fonts.Regular,
     fontSize: responsiveFontSize(1.7),
     marginTop: -3,

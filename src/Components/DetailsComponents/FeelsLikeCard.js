@@ -8,16 +8,17 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
+import {getTitleByTemp} from '../../Utils/WeatherConditions';
 
-const FeelsLikeCard = () => {
+const FeelsLikeCard = ({feelsLike}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="temperature-low" size={18} color={ThemeColors.Gray1} />
+        <Icon name="temperature-low" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>FEELS LIKE</Text>
       </View>
-      <Text style={styles.level}>50°</Text>
-      <Text style={styles.sunset}>Similar to the actual temperature</Text>
+      <Text style={styles.level}>{feelsLike?.toFixed(0) || 0}°</Text>
+      <Text style={styles.sunset}>{getTitleByTemp(feelsLike)}</Text>
     </View>
   );
 };
@@ -25,7 +26,7 @@ const FeelsLikeCard = () => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(22),
-    width: responsiveWidth(44),
+    width: responsiveWidth(43.2),
     backgroundColor: ThemeColors.DarkBlue,
     borderColor: ThemeColors.LightPurple,
     paddingVertical: 15,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   label: {
-    color: ThemeColors.Gray1,
+    color: ThemeColors.Gray,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },
@@ -53,10 +54,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   sunset: {
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray1,
     fontFamily: Fonts.Regular,
-    fontSize: responsiveFontSize(1.7),
+    fontSize: responsiveFontSize(1.8),
     textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 

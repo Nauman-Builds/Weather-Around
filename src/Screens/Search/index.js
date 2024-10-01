@@ -12,7 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useGetWeatherByCityQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
+import {useGetWeatherByCityQuery} from '../../Redux-Toolkit/WeatherApi/openWeatherAPI';
 import Loader from '../../Components/Common/Loader';
 import MessageAlert from '../../Components/Common/MessageAlert';
 import Icons from '../../Assets/Icons';
@@ -203,10 +203,10 @@ const styles = StyleSheet.create({
   recentSearch: {
     marginHorizontal: 7,
     fontFamily: Fonts.Light,
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray2,
   },
   placeholderText: {
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray2,
     fontSize: 16,
     textAlign: 'center',
     fontFamily: Fonts.ExtraLight,

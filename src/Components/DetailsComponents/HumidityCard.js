@@ -8,16 +8,17 @@ import {
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 import Icons from '../../Assets/Icons';
+import {getTitleByHumidity} from '../../Utils/WeatherConditions';
 
-const HumidityCard = () => {
+const HumidityCard = ({humidity}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
         <Image source={Icons.humidityIcon} style={styles.humidityIcon} />
         <Text style={styles.label}>HUMIDITY</Text>
       </View>
-      <Text style={styles.level}>90%</Text>
-      <Text style={styles.sunset}>The dew point is 17 right now</Text>
+      <Text style={styles.level}>{humidity}%</Text>
+      <Text style={styles.sunset}>{getTitleByHumidity(humidity)}</Text>
     </View>
   );
 };
@@ -25,7 +26,7 @@ const HumidityCard = () => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(22),
-    width: responsiveWidth(44),
+    width: responsiveWidth(43.2),
     backgroundColor: ThemeColors.DarkBlue,
     borderColor: ThemeColors.LightPurple,
     paddingVertical: 14,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   label: {
-    color: ThemeColors.Gray1,
+    color: ThemeColors.Gray,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },
@@ -53,10 +54,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   sunset: {
-    color: ThemeColors.Gray2,
+    color: ThemeColors.LightGray1,
     fontFamily: Fonts.Regular,
     fontSize: responsiveFontSize(1.7),
     textAlign: 'center',
+    alignSelf: 'center',
   },
   humidityIcon: {
     height: responsiveHeight(1.8),

@@ -11,25 +11,23 @@ import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 import Icons from '../../Assets/Icons';
 
-const PressureCard = ({PressureCount = 1100}) => {
+const PressureCard = ({pressure}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="gauge" size={20} color={ThemeColors.Gray1} />
+        <Icon name="gauge" size={20} color={ThemeColors.Gray} />
         <Text style={styles.label}>PRESSURE</Text>
       </View>
       <Image source={Icons.pressure} style={styles.sunriseImage} />
       <View style={styles.PressureCont}>
         <Icoon
           name={
-            PressureCount > 1000
-              ? 'arrow-down-wide-short'
-              : 'arrow-up-wide-short'
+            pressure > 1000 ? 'arrow-up-wide-short' : 'arrow-down-wide-short'
           }
           size={20}
-          color={ThemeColors.Gray1}
+          color={ThemeColors.Gray}
         />
-        <Text style={styles.windSpeed}>1002 mb</Text>
+        <Text style={styles.windSpeed}>{pressure}mb</Text>
       </View>
     </View>
   );
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   label: {
-    color: ThemeColors.Gray1,
+    color: ThemeColors.Gray,
     fontSize: responsiveFontSize(1.6),
     fontFamily: Fonts.Regular,
   },

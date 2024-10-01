@@ -17,7 +17,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
-import {useGetWeatherByCityQuery} from '../../Redux-Toolkit/WeatherSlice/openWeatherApi';
+import {useGetWeatherByCityQuery} from '../../Redux-Toolkit/WeatherApi/openWeatherAPI';
 import Loader from '../Common/Loader';
 import MessageAlert from '../Common/MessageAlert';
 
@@ -85,35 +85,30 @@ const WeatherCard = ({cityName, onPress}) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: rw(87),
+    width: rw(88),
     height: rh(21.7),
     marginVertical: rh(1.25),
-    paddingHorizontal: 19,
-    paddingVertical: 14,
-    gap: rh(1.1),
-    alignSelf: 'center',
+    paddingHorizontal: rw(5.2),
+    paddingVertical: rh(1.2),
   },
   temperature: {
     color: ThemeColors.White,
-    fontSize: rf(8.3),
+    fontSize: rf(8.2),
     fontFamily: Fonts.ExtraLight,
-  },
-  tempDetails: {
-    gap: rh(0.37),
   },
   highLow: {
     color: ThemeColors.White,
-    fontSize: rf(2.0),
+    fontSize: rf(1.9),
     fontFamily: Fonts.Light,
   },
   location: {
     color: ThemeColors.White,
-    fontSize: rf(2.0),
+    fontSize: rf(2),
   },
   weatherIconContainer: {
     position: 'absolute',
     right: 12,
-    top: -10,
+    top: -11,
     alignItems: 'center',
   },
   weatherIcon: {

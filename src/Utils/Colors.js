@@ -1,8 +1,11 @@
 const ThemeColors = {
   White: '#FFFFFF',
   Black: '#000000',
-  Gray1: '#9990b3',
-  Gray2: '#E2DFD2',
+  DarkGray: '#B8B8B8',
+  Gray: '#9990b3',
+  LightGray: '#E0E0E0',
+  LightGray1: '#E2DFD2',
+  LightGray2: '#E8E8E8',
   Purple: '#362e6b',
   Purple2: '#48319D',
   LightPurple: '#7582F4',

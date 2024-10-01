@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: ThemeColors.White,
     fontFamily: 'sans-serif',
+    textAlign: 'center',
   },
   Img: {
     height: 30,

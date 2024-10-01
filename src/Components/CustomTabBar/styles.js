@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: -3,
+    bottom: -4,
   },
   icon: {
     width: rw(5.4),

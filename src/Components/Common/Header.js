@@ -1,13 +1,19 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {responsiveHeight, responsiveWidth} from 'react-native-responsive-dimensions';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
-const Header = ({Title}) => {
+const Header = ({Title, backButtonPress}) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity accessible accessibilityLabel="Go Back">
+        <TouchableOpacity
+          accessible
+          accessibilityLabel="Go Back"
+          onPress={backButtonPress}>
           <Icon name="chevron-back-sharp" size={31} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerText}>{Title}</Text>
