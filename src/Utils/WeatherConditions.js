@@ -75,6 +75,8 @@ export const getTitleByUV = UVindex => {
 
 export const getTitleByAQI = aqi => {
   switch (true) {
+    case aqi === 0:
+      return '- Data not available';
     case aqi === 1:
       return 'Good - Enjoy outside!';
     case aqi === 2:
@@ -90,6 +92,8 @@ export const getTitleByAQI = aqi => {
 
 export const getIndicatorByAQI = aqi => {
   switch (true) {
+    case aqi === 0:
+      return 1;
     case aqi === 1:
       return 10;
     case aqi === 2:
@@ -137,14 +141,14 @@ export const getWeatherIconSize = condition => {
       };
     case 'rain':
       return {
-        width: rw(36),
-        height: rh(17),
+        width: rw(35),
+        height: rh(16),
         top: -4,
         marginBottom: -15,
       };
     case 'fog':
       return {
-        width: rw(35),
+        width: rw(34),
         height: rh(15.5),
       };
     case 'wind':
@@ -152,20 +156,20 @@ export const getWeatherIconSize = condition => {
         width: rw(41),
         height: rh(18),
         top: -10,
-        marginBottom: -24,
+        marginBottom: -25,
       };
     case 'cloudy':
       return {
-        width: rw(39),
+        width: rw(40),
         height: rh(16.5),
         top: -10,
-        marginBottom: -10,
+        marginBottom: -12,
       };
     case 'partly-cloudy-day':
       return {
         width: rw(38),
         height: rh(20),
-        top: -15,
+        top: -18,
         marginBottom: -40,
       };
     case 'partly-cloudy-night':
@@ -178,15 +182,15 @@ export const getWeatherIconSize = condition => {
     case 'clear-day':
       return {
         width: rw(35),
-        height: rh(20),
-        top: -17,
-        marginBottom: -38,
+        height: rh(21),
+        top: -24,
+        marginBottom: -45,
       };
     case 'clear-night':
       return {
         width: rw(36),
         height: rh(22),
-        top: -20,
+        top: -22,
         marginBottom: -55,
       };
     default:

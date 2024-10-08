@@ -1,10 +1,12 @@
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ThemeColors from '../../Utils/Colors';
+import Fonts from '../../Utils/Fonts';
+import {responsiveFontSize as rf} from 'react-native-responsive-dimensions';
 
-const Loader = ({size, LoadingText}) => {
+const Loader = ({size, LoadingText, bodyStyle}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, bodyStyle]}>
       <ActivityIndicator size={size} color={ThemeColors.White} />
       <Text style={styles.title}>{LoadingText}</Text>
     </View>
@@ -31,9 +33,9 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   title: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: rf(1.6),
     color: ThemeColors.White,
-    fontFamily: 'sans-serif',
+    fontFamily: Fonts.Medium,
+    textAlign: 'center',
   },
 });

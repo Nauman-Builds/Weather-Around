@@ -1,5 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {GeocodingAPiKey} from '../../Utils/ApiKey';
 
 export const getCityNameByCoords = createApi({
   reducerPath: 'GeocodingApi',
@@ -9,7 +8,7 @@ export const getCityNameByCoords = createApi({
   endpoints: builder => ({
     getCityNameByCoords: builder.query({
       query: ({lat, lon}) =>
-        `google-v3-json?q=${lat},${lon}&key=${GeocodingAPiKey}&language=en&address_only=1`,
+        `google-v3-json?q=${lat},${lon}&key=${process.env.GEO_CODING_API_KEY}&language=en&address_only=1`,
       transformResponse: res => {
         const result = res?.results?.[0];
         const city = result.address_components?.find(component =>

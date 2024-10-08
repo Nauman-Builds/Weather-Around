@@ -17,15 +17,24 @@ import {
   selectCityName,
   selectWeatherData,
   selectAirQualityData,
-} from '../../Redux-Toolkit/WeatherSlice/WeatherDataSlice';
-import {useNavigation} from '@react-navigation/native';
+} from '../../Redux-Toolkit/CurrentWeatherSlice';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import Payment from '../../Components/PaymentComponent';
 
 const DetailScreen = () => {
-  const cityName = useSelector(selectCityName);
-  const weatherData = useSelector(selectWeatherData);
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  const reduxCityName = useSelector(selectCityName);
+  const reduxWeatherData = useSelector(selectWeatherData);
   const airQualityData = useSelector(selectAirQualityData);
 
-  const navigation = useNavigation();
+  const {weatherData: navWeatherData} = route.params || {};
+
+  const cityName = navWeatherData?.city || reduxCityName;
+  const weatherData = navWeatherData || reduxWeatherData;
+
+  console.log(navWeatherData);
 
   return (
     <LinearGradient
@@ -50,6 +59,7 @@ const DetailScreen = () => {
             sunset={weatherData?.currentConditions?.sunsetEpoch || '0:00'}
           />
         </View>
+        <Payment />
         <View style={styles.background}>
           <WindsCard speed={weatherData?.currentConditions?.windspeed} />
           <RainCard
@@ -84,7 +94,7 @@ const styles = StyleSheet.create({
     paddingBottom: 110,
     marginTop: 10,
     alignItems: 'center',
-    gap: 12,
+    gap: 10,
   },
   background: {
     gap: 10,

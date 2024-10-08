@@ -21,9 +21,9 @@ import {
   setAirQuality,
   setCityName,
   setWeatherData,
-} from '../../Redux-Toolkit/WeatherSlice/WeatherDataSlice';
+} from '../../Redux-Toolkit/CurrentWeatherSlice';
 import {useGetCityNameByCoordsQuery} from '../../Redux-Toolkit/WeatherApi/geoCodingAPI';
-import {useGetWeatherByCityOrCoordsQuery} from '../../Redux-Toolkit/WeatherApi/weatherAPI';
+import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherApi/weatherAPI';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState({
@@ -47,7 +47,7 @@ const WeatherScreen = () => {
     error: weatherError,
     isLoading: weatherLoading,
     refetch: weatherRefetch,
-  } = useGetWeatherByCityOrCoordsQuery(location, {
+  } = useGetWeatherByCoordsQuery(location, {
     skip: !location.lat || !location.lon,
   });
 

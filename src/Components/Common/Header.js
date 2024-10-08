@@ -29,7 +29,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    width: responsiveWidth(92),
+    width: responsiveWidth(90),
     paddingVertical: 9,
     flexDirection: 'row',
     justifyContent: 'space-between',

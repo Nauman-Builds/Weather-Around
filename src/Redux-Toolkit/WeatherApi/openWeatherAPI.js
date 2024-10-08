@@ -1,5 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {OpenWeatherAPiKey} from '../../Utils/ApiKey';
 
 const transformWeatherResponse = res => ({
   main: res?.main || {},
@@ -18,22 +17,23 @@ export const getWeatherByOpenWeather = createApi({
   }),
   endpoints: builder => ({
     getWeatherByCity: builder.query({
-      query: cityName => `weather?q=${cityName}&appid=${OpenWeatherAPiKey}`,
+      query: cityName =>
+        `weather?q=${cityName}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: transformWeatherResponse,
     }),
     getWeatherByCoords: builder.query({
       query: ({lat, lon}) =>
-        `weather?lat=${lat}&lon=${lon}&appid=${OpenWeatherAPiKey}`,
+        `weather?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: transformWeatherResponse,
     }),
     getForecastByCoords: builder.query({
       query: ({lat, lon}) =>
-        `forecast?lat=${lat}&lon=${lon}&appid=${OpenWeatherAPiKey}`,
+        `forecast?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: res => console.log(res?.list),
     }),
     getAirQualityByCoords: builder.query({
       query: ({lat, lon}) =>
-        `/air_pollution?lat=${lat}&lon=${lon}&appid=${OpenWeatherAPiKey}`,
+        `/air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: res => res?.list[0]?.main,
     }),
   }),

@@ -1,13 +1,5 @@
 import React, {memo} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  ToastAndroid,
-} from 'react-native';
-import Icons from '../../Assets/Icons';
+import {View, Text, StyleSheet, Image, ImageBackground} from 'react-native';
 import Images from '../../Assets/Images';
 import {
   responsiveHeight as rh,
@@ -16,8 +8,6 @@ import {
 } from 'react-native-responsive-dimensions';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
-import Loader from '../Common/Loader';
-import MessageAlert from '../Common/MessageAlert';
 import {
   getWeatherIcon,
   getWeatherIconSize,
@@ -39,7 +29,8 @@ const WeatherCard = ({cityName, weatherData}) => {
       </View>
       <Text style={styles.location}>
         {cityName?.neighborhood?.split(' ').slice(0, 2).join(' ') ||
-          cityName?.city?.split(' ').slice(0, 2).join(' ')}
+          cityName?.city?.split(' ').slice(0, 2).join(' ') ||
+          cityName?.split(', ').slice(0, 2).join(' ')}
       </Text>
       <View style={styles.weatherIconContainer}>
         <Image
@@ -67,11 +58,6 @@ const styles = StyleSheet.create({
     fontSize: rf(8.2),
     fontFamily: Fonts.ExtraLight,
   },
-  highLow: {
-    color: ThemeColors.White,
-    fontSize: rf(1.9),
-    fontFamily: Fonts.Light,
-  },
   location: {
     fontFamily: Fonts.Light,
     color: ThemeColors.White,
@@ -90,16 +76,15 @@ const styles = StyleSheet.create({
   },
   weatherIconContainer: {
     position: 'absolute',
-    right: 17,
+    right: 15,
     gap: 12,
-    alignItems: 'center',
   },
   weatherDescription: {
     color: ThemeColors.White,
-    fontSize: rf(1.9),
+    fontSize: rf(2),
     fontFamily: Fonts.ExtraLight,
-    alignSelf: 'flex-end',
-    right: 10,
+    textAlign: 'center',
+    left: 3,
   },
 });
 

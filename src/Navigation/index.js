@@ -1,14 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import {StatusBar} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../Screens/Home';
-import DetailScreen from '../Screens/Details';
-import SearchScreen from '../Screens/Search';
 import {NavigationContainer} from '@react-navigation/native';
 import CustomTabBar from '../Components/CustomTabBar';
-import {Alert, StatusBar} from 'react-native';
-import messaging from '@react-native-firebase/messaging';
-import notifee, {AndroidImportance} from '@notifee/react-native';
-import ThemeColors from '../Utils/Colors';
+import HomeScreen from '../Screens/Home';
+import DetailScreen from '../Screens/Details';
+import SearchWeatherScreen from '../Screens/Search';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +21,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchWeatherScreen}
         options={{headerShown: false}}
       />
       <Tab.Screen

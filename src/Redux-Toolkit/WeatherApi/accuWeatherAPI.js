@@ -1,5 +1,4 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {AccuWeatherAPiKey} from '../../Utils/ApiKey';
 
 export const getWeatherByAccuWeather = createApi({
   reducerPath: 'AccuWeatherApi',
@@ -9,23 +8,23 @@ export const getWeatherByAccuWeather = createApi({
   endpoints: builder => ({
     getLocationKeyByCoords: builder.query({
       query: ({lat, lon}) =>
-        `locations/v1/cities/geoposition/search?apikey=${AccuWeatherAPiKey}&q=${lat},${lon}`,
+        `locations/v1/cities/geoposition/search?apikey=${process.env.ACCU_WEATHER_API_KEY}&q=${lat},${lon}`,
     }),
     getLocationKeyByCity: builder.query({
       query: city =>
-        `locations/v1/cities/search?apikey=${AccuWeatherAPiKey}&q=${city}`,
+        `locations/v1/cities/search?apikey=${process.env.ACCU_WEATHER_API_KEY}&q=${city}`,
     }),
     getAutoCompleteListByText: builder.query({
       query: text =>
-        `locations/v1/cities/autocomplete?apikey=${AccuWeatherAPiKey}&q=${text}`,
+        `locations/v1/cities/autocomplete?apikey=${process.env.ACCU_WEATHER_API_KEY}&q=${text}`,
     }),
     getCurrentWeatherByKey: builder.query({
-      query: (locationKey) =>
-        `currentconditions/v1/${locationKey}?apikey=${AccuWeatherAPiKey}`,
+      query: locationKey =>
+        `currentconditions/v1/${locationKey}?apikey=${process.env.ACCU_WEATHER_API_KEY}`,
     }),
     getWeather1DForecastByKey: builder.query({
-      query: (locationKey) =>
-        `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${AccuWeatherAPiKey}`,
+      query: locationKey =>
+        `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${process.env.ACCU_WEATHER_API_KEY}`,
     }),
   }),
 });

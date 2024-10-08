@@ -1,5 +1,10 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {VisualCrossingKey} from '../../Utils/ApiKey';
+
+const transformWeatherResponse = res => ({
+  currentConditions: res?.currentConditions || {},
+  days: res?.days[0] || {},
+  city: res?.resolvedAddress,
+});
 
 export const getWeatherByVisualCrossing = createApi({
   reducerPath: 'VisualCrossingApi',
@@ -8,15 +13,18 @@ export const getWeatherByVisualCrossing = createApi({
       'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/',
   }),
   endpoints: builder => ({
-    getWeatherByCityOrCoords: builder.query({
+    getWeatherByCoords: builder.query({
       query: ({lat, lon, periods}) =>
-        `${lat}%2C${lon}/${periods}?unitGroup=metric&include=days%2Ccurrent&key=${VisualCrossingKey}&contentType=json`,
-      transformResponse: res => ({
-        currentConditions: res?.currentConditions || {},
-        days: res?.days[0] || {},
-      }),
+        `${lat}%2C${lon}/${periods}?unitGroup=metric&include=days%2Ccurrent&key=${process.env.VISUAL_CROSSING_API_KEY}&contentType=json`,
+      transformResponse: transformWeatherResponse,
+    }),
+    getWeatherByCity: builder.query({
+      query: ({cityName, periods = 'today'}) =>
+        `${cityName}/${periods}?unitGroup=metric&include=days%2Ccurrent&key=${process.env.VISUAL_CROSSING_API_KEY}&contentType=json`,
+      transformResponse: transformWeatherResponse,
     }),
   }),
 });
 
-export const {useGetWeatherByCityOrCoordsQuery} = getWeatherByVisualCrossing;
+export const {useGetWeatherByCoordsQuery, useGetWeatherByCityQuery} =
+  getWeatherByVisualCrossing;

@@ -1,6 +1,12 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ThemeColors from '../../Utils/Colors';
+import Fonts from '../../Utils/Fonts';
+import {
+  responsiveFontSize as rf,
+  responsiveWidth as rw,
+  responsiveHeight as rh,
+} from 'react-native-responsive-dimensions';
 
 const MessageAlert = ({Icon, MessageText, bodyStyle}) => {
   return (
@@ -31,14 +37,13 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   title: {
-    fontSize: 15,
-    fontWeight: 'bold',
+    fontSize: rf(1.5),
     color: ThemeColors.White,
-    fontFamily: 'sans-serif',
+    fontFamily: Fonts.Regular,
     textAlign: 'center',
   },
   Img: {
-    height: 30,
-    width: 30,
+    height: rh(3.9),
+    width: rw(7.7),
   },
 });

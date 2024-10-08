@@ -1,5 +1,7 @@
 import {useEffect} from 'react';
-import notifee, {EventType} from '@notifee/react-native';
+import notifee, {EventType, AndroidImportance} from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+import ThemeColors from '../Utils/Colors';
 
 function App() {
   useEffect(() => {

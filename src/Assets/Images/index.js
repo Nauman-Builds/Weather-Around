@@ -6,6 +6,7 @@ const Images = {
   WeatherCardBack: require('./WeatherCardBack.png'),
   Sunrise: require('./Sunrise.png'),
   WindMeter: require('./WindMeter.png'),
+  PaymentCard: require('./PaymentCard.png')
 };
 
 export default Images;

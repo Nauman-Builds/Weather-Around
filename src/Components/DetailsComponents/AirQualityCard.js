@@ -26,7 +26,12 @@ const AirQualityCard = ({CurrentAirQuality}) => {
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 0.5}}
         style={styles.progressBar}>
-        <View style={[styles.indicator, {left: responsiveWidth(getIndicatorByAQI(5))}]} />
+        <View
+          style={[
+            styles.indicator,
+            {left: responsiveWidth(getIndicatorByAQI(CurrentAirQuality))},
+          ]}
+        />
       </LinearGradient>
     </View>
   );
