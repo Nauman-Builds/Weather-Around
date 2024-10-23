@@ -118,6 +118,16 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.android.material:material:1.12.0")
+    implementation(project(':react-native-onesignal')){
+        exclude group: 'com.google.android.gms'
+    }
+    implementation(project(':react-native-maps')){
+        exclude group: 'com.google.android.gms'
+    }
+    implementation("com.google.android.gms:play-services-base:18.5.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.onesignal:OneSignal:5.1.23")
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

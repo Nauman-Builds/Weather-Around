@@ -5,7 +5,7 @@ import {
   ImageBackground,
   Image,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Icons from '../../Assets/Icons';
 import Images from '../../Assets/Images';
 import styles from './styles';
@@ -16,14 +16,17 @@ import {useGetAirQualityByCoordsQuery} from '../../Redux-Toolkit/WeatherApi/open
 import Loader from '../../Components/Common/Loader';
 import MessageAlert from '../../Components/Common/MessageAlert';
 import WeatherComponent from '../../Components/HomeComponents/WeatherComponent';
-import notifee, {AndroidImportance} from '@notifee/react-native';
 import {
+  selectIsDayTimeStatus,
   setAirQuality,
   setCityName,
+  setDayTimeStatus,
   setWeatherData,
 } from '../../Redux-Toolkit/CurrentWeatherSlice';
 import {useGetCityNameByCoordsQuery} from '../../Redux-Toolkit/WeatherApi/geoCodingAPI';
 import {useGetWeatherByCoordsQuery} from '../../Redux-Toolkit/WeatherApi/weatherAPI';
+import {onWeatherNotification} from '../../Notification/NotificationBar';
+import moment from 'moment';
 
 const WeatherScreen = () => {
   const [location, setLocation] = useState({
@@ -122,47 +125,16 @@ const WeatherScreen = () => {
   );
 
   const cityName = useMemo(() => {
+    if (!GeocodingData) return null;
     return (
       GeocodingData?.neighborhood?.split(' ').slice(0, 2).join(' ') ||
       GeocodingData?.city?.split(' ').slice(0, 2).join(' ')
     );
   }, [GeocodingData]);
 
-  const onDisplayNotification = useCallback(
-    async weather => {
-      if (!weatherData || !GeocodingData) return;
-      await notifee.requestPermission();
-
-      const channelId = await notifee.createChannel({
-        id: 'important',
-        name: 'Default Channel',
-        importance: AndroidImportance.HIGH,
-      });
-
-      const {temp, conditions} = weather?.currentConditions;
-
-      await notifee.displayNotification({
-        title: cityName,
-        body: `${temp?.toFixed(0)}°C - ${conditions}`,
-        android: {
-          channelId,
-          importance: AndroidImportance.HIGH,
-          smallIcon: 'app_logo',
-          color: ThemeColors.LightPurple,
-          pressAction: {
-            id: 'default',
-          },
-        },
-      });
-    },
-    [weatherData, GeocodingData, cityName],
-  );
-
   useEffect(() => {
     if (location.lat && location.lon) {
-      weatherRefetch();
-      AirQualityRefetch();
-      GeocodingRefetch();
+      Promise.all([weatherRefetch(), AirQualityRefetch(), GeocodingRefetch()]);
     }
   }, [location.lat, location.lon]);
 
@@ -171,14 +143,26 @@ const WeatherScreen = () => {
       dispatch(setCityName(GeocodingData));
       dispatch(setWeatherData(weatherData));
       dispatch(setAirQuality(AirQualityData));
-      onDisplayNotification(weatherData);
+      const {sunriseEpoch, sunsetEpoch} = weatherData?.currentConditions;
+      const sunrise = moment.unix(sunriseEpoch);
+      const sunset = moment.unix(sunsetEpoch);
+      const now = moment();
+      const isDay = now.isBetween(sunrise, sunset);
+      dispatch(setDayTimeStatus(isDay));
+
+      onWeatherNotification(weatherData, cityName);
     }
-  }, [weatherData]);
+  }, [weatherData, weatherLoading, dispatch]);
+
+  const isDayTimeStatus = useSelector(selectIsDayTimeStatus);
+  const backgroundSource = isDayTimeStatus
+    ? Images.DayBackground
+    : Images.NightBackground;
 
   if (locationError || weatherError?.message || GeocodingError?.message) {
     return (
       <ImageBackground
-        source={Images.Background}
+        source={backgroundSource}
         style={[styles.container, {paddingTop: 180}]}>
         <MessageAlert
           Icon={Icons.alertIcon}
@@ -192,7 +176,7 @@ const WeatherScreen = () => {
   if (weatherLoading || !location.lat || !location.lon) {
     return (
       <ImageBackground
-        source={Images.Background}
+        source={backgroundSource}
         style={[styles.container, {paddingTop: 180}]}>
         <Loader
           size={'large'}
@@ -207,11 +191,18 @@ const WeatherScreen = () => {
   }
 
   return (
-    <ImageBackground source={Images.Background} style={styles.container}>
+    <ImageBackground
+      source={backgroundSource}
+      style={[styles.container, {paddingTop: isDayTimeStatus ? 100 : 105}]}>
       {weatherData && (
-        <WeatherComponent WeatherData={weatherData} CityName={GeocodingData} />
+        <>
+          <WeatherComponent
+            WeatherData={weatherData}
+            CityName={GeocodingData}
+          />
+          <Image source={Images.House} style={styles.houseImg} />
+        </>
       )}
-      <Image source={Images.House} style={styles.houseImg} />
     </ImageBackground>
   );
 };

@@ -13,32 +13,32 @@ const styles = StyleSheet.create({
   city: {
     fontFamily: Fonts.Light,
     fontSize: rf(5),
-    color: ThemeColors.White,
+    color: ThemeColors.DelftBlue,
     marginVertical: -7,
     textAlign: 'center',
   },
   temperature: {
     fontFamily: Fonts.ExtraLight,
     fontSize: rf(12),
-    color: ThemeColors.White,
+    color: ThemeColors.DelftBlue,
     marginLeft: 7,
     textAlign: 'center',
   },
   condition: {
     fontSize: rf(2.8),
     fontFamily: Fonts.ExtraLight,
-    color: ThemeColors.LightGray2,
+    color: ThemeColors.DelftBlue,
     textAlign: 'center',
   },
   feels_like: {
     fontFamily: Fonts.ExtraLight,
     fontSize: rf(2.5),
-    color: ThemeColors.LightGray,
+    color: ThemeColors.DelftBlue,
   },
   feelsLikeTxt: {
     fontFamily: Fonts.ExtraLight,
     fontSize: rf(2.5),
-    color: ThemeColors.LightGray,
+    color: ThemeColors.NavyBlue,
   },
   lowHigh: {
     flexDirection: 'row',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   lowHighText: {
     fontFamily: Fonts.ExtraLight,
-    color: ThemeColors.LightGray,
+    color: ThemeColors.DelftBlue,
     fontSize: rf(2.5),
   },
 });

@@ -7,6 +7,11 @@
         <item name="colorAccent">@color/color_3</item>
         <item name="android:textColor">@color/color_3</item>
         <item name="android:fontFamily">sans-serif</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:hardwareAccelerated">true</item>
     </style>
 
 </resources>

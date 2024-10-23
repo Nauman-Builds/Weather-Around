@@ -4,6 +4,7 @@ const initialState = {
   weatherData: null,
   airQuality: null,
   cityName: null,
+  isDayTime: true,
 };
 
 const weatherDataSlice = createSlice({
@@ -19,14 +20,18 @@ const weatherDataSlice = createSlice({
     setAirQuality: (state, action) => {
       state.airQuality = action.payload;
     },
+    setDayTimeStatus: (state, action) => {
+      state.isDayTime = action.payload;
+    },
   },
 });
 
-export const {setWeatherData, setAirQuality, setCityName} =
+export const {setWeatherData, setAirQuality, setCityName, setDayTimeStatus} =
   weatherDataSlice.actions;
 
 export const selectCityName = state => state.weatherData?.cityName;
 export const selectWeatherData = state => state.weatherData?.weatherData;
 export const selectAirQualityData = state => state.weatherData?.airQuality;
+export const selectIsDayTimeStatus = state => state.weatherData?.isDayTime;
 
 export default weatherDataSlice.reducer;

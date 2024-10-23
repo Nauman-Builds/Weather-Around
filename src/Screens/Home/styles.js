@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 65,
-    paddingTop: 110,
+    paddingTop: 100,
   },
   houseImg: {
     height: responsiveHeight(35),

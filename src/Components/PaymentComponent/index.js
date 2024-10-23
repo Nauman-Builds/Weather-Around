@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {useStripe} from '@stripe/stripe-react-native';
+import {useStripe, retrievePaymentIntent} from '@stripe/stripe-react-native';
 import {useCreatePaymentIntentMutation} from '../../Redux-Toolkit/PaymentAPI';
 import {
   View,
@@ -21,11 +21,14 @@ import Fonts from '../../Utils/Fonts';
 import ThemeColors from '../../Utils/Colors';
 import Images from '../../Assets/Images';
 import Loader from '../Common/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Payment = () => {
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
-  const [createPaymentIntent, {isLoading, data: paymentIntent, error}] =
+  const [createPaymentIntent, {isLoading, data: paymentIntent}] =
     useCreatePaymentIntentMutation();
+  const [paymentSheetInitialized, setPaymentSheetInitialized] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const amount = useMemo(() => 500, []);
   const currency = useMemo(() => 'usd', []);
@@ -38,55 +41,133 @@ const Payment = () => {
     }
   }, []);
 
-  const initializePaymentSheet = useCallback(async () => {
-    if (!paymentIntent) {
-      try {
-        const res = await createPaymentIntent({
-          amount,
-          currency,
-        }).unwrap();
-
-        if (res?.client_secret) {
-          const {error} = await initPaymentSheet({
-            paymentIntentClientSecret: res?.client_secret,
-            merchantDisplayName: 'Test Store',
-          });
-          if (error) {
-            showMessage(`error.message`, true);
-          }
-        } else {
-          showMessage('Unable to retrieve payment secret', true);
-        }
-      } catch (error) {
-        showMessage('Failed to initialize payment sheet', true);
+  const handleAsyncStorage = useCallback(async (action, key, value = null) => {
+    try {
+      if (action === 'get') {
+        return await AsyncStorage.getItem(key);
       }
+      if (action === 'set') {
+        await AsyncStorage.setItem(key, value);
+      }
+      if (action === 'remove') {
+        await AsyncStorage.removeItem(key);
+      }
+    } catch (error) {
+      console.error(`AsyncStorage ${action} error for ${key}:`, error);
+    }
+  }, []);
+
+  const checkLastPaymentStatus = useCallback(async () => {
+    try {
+      const lastPaymentIntentId = await handleAsyncStorage(
+        'get',
+        'lastPaymentIntentId',
+      );
+      if (!lastPaymentIntentId) return null;
+
+      const {paymentIntent, error} = await retrievePaymentIntent(
+        lastPaymentIntentId,
+      );
+      if (error) {
+        showMessage('Error retrieving last payment status', true);
+        return null;
+      }
+      return paymentIntent?.status;
+    } catch (error) {
+      showMessage('Error retrieving last payment status', true);
+      return null;
+    }
+  }, [handleAsyncStorage, showMessage]);
+
+  const initializePaymentSheet = useCallback(async () => {
+    const lastPaymentStatus = await checkLastPaymentStatus();
+
+    if (lastPaymentStatus === 'succeeded') {
+      showMessage('Payment already completed!');
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await createPaymentIntent({
+        amount,
+        currency,
+      }).unwrap();
+
+      if (res?.client_secret) {
+        const {error} = await initPaymentSheet({
+          paymentIntentClientSecret: res?.client_secret,
+          merchantDisplayName: 'Test Store',
+        });
+        if (error) {
+          showMessage(`Initialization error: ${error.message}`, true);
+        } else {
+          setPaymentSheetInitialized(true);
+        }
+      } else {
+        showMessage('Unable to retrieve payment secret', true);
+      }
+    } catch (error) {
+      showMessage('Failed to initialize payment sheet', true);
+    } finally {
+      setLoading(false);
     }
   }, [
+    checkLastPaymentStatus,
     createPaymentIntent,
     initPaymentSheet,
-    paymentIntent,
-    currency,
     amount,
+    currency,
     showMessage,
   ]);
 
   const openPaymentSheet = useCallback(async () => {
+    const lastPaymentIntentId = await handleAsyncStorage(
+      'get',
+      'lastPaymentIntentId',
+    );
+    if (!lastPaymentIntentId) {
+      showMessage('Payment already completed!');
+      return;
+    }
+
+    if (!paymentSheetInitialized) {
+      showMessage('Payment sheet is not initialized yet.', true);
+      return;
+    }
+    setLoading(true);
     try {
       const {error} = await presentPaymentSheet();
       if (error) {
         showMessage(
           error.code === 'Canceled'
             ? `Payment has been canceled`
-            : error.message,
+            : `Error: ${error.message}`,
           true,
         );
+        console.log(`Error: ${error.message}`);
       } else {
         showMessage('Payment successful!');
+        if (paymentIntent?.id) {
+          await handleAsyncStorage(
+            'set',
+            'lastPaymentIntentId',
+            paymentIntent.id,
+          );
+        }
+        await handleAsyncStorage('remove', 'lastPaymentIntentId');
       }
     } catch (error) {
       showMessage('Something went wrong with the payment', true);
+    } finally {
+      setLoading(false);
     }
-  }, [presentPaymentSheet, showMessage]);
+  }, [
+    paymentSheetInitialized,
+    presentPaymentSheet,
+    showMessage,
+    paymentIntent,
+    handleAsyncStorage,
+  ]);
 
   useEffect(() => {
     initializePaymentSheet();
@@ -95,9 +176,9 @@ const Payment = () => {
   return (
     <TouchableOpacity
       onPress={openPaymentSheet}
-      disabled={isLoading}
+      disabled={isLoading || loading || !paymentSheetInitialized}
       style={styles.align}>
-      {isLoading ? (
+      {isLoading || loading ? (
         <Loader size={32} LoadingText={'Wait'} bodyStyle={styles.Loader} />
       ) : (
         <LinearGradient

@@ -17,11 +17,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Header from '../../Components/Common/Header';
 import Fonts from '../../Utils/Fonts';
 import ThemeColors from '../../Utils/Colors';
+import {useNavigation} from '@react-navigation/native';
 
 const SearchWeatherScreen = () => {
   const [searchLocation, setSearchLocation] = useState('');
-  const dispatch = useDispatch();
   const recentSearches = useSelector(selectLastSearches);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     dispatch(loadStoredSearches());
@@ -46,7 +48,10 @@ const SearchWeatherScreen = () => {
       style={styles.container}
       start={{x: -0.55, y: 0.15}}
       end={{x: 0.35, y: 1.15}}>
-      <Header Title={'Weather'} />
+      <Header
+        Title={'Weather'}
+        backButtonPress={() => navigation.navigate('Home')}
+      />
       <View style={styles.searchContainer}>
         <Icon name="search" size={20} color="#fff" style={styles.searchIcon} />
         <TextInput
