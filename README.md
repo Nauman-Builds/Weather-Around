@@ -103,21 +103,22 @@ yarn ios
 
 ---
 
-## 🧑‍💻 Author
+## 🧑‍💻 **Author**
 
-**[Muhammad Nauman Zafar]**  
-Mobile Application Developer | React Native | Firebase | IoT Sensors | Google Maps SDK | Typescript | Tailwind CSS | Android Native | iOS | JavaScript ES6 
+**Muhammad Nauman Zafar**  
+📱 *Mobile Application Developer* | React Native | Firebase | IoT Sensors | Google Maps SDK | TypeScript | Tailwind CSS | Android | iOS | JavaScript ES6  
 
-**Experience:** 3 Years in Mobile App Development  
-📧 Contact: [nauman.zafar.123@gmail.com] 
-🔗 [GitHub](https://github.com/Nauman-Builds)
-🔗 [Linkedin](https://linkedin.com/in/nauman-tech/)
+**💼 Experience:** 3+ Years in Mobile App Development  
+📧 **Email:** [nauman.zafar.123@gmail.com](mailto:nauman.zafar.123@gmail.com)  
+🔗 **GitHub:** [Nauman-Builds](https://github.com/Nauman-Builds)  
+🔗 **LinkedIn:** [Nauman Tech](https://linkedin.com/in/nauman-tech/)
 
 ---
 
 ## 📝 License
   
-This project is for **educational and portfolio purposes only**.
+This project is created for **work demonstration and portfolio purposes** only.  
+© 2025 Muhammad Nauman Zafar – All Rights Reserved.
 
 ---
 
