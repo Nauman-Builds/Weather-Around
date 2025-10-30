@@ -33,7 +33,6 @@ export const loadStoredSearches = () => async dispatch => {
     const storedSearches = await AsyncStorage.getItem('lastSearches');
     if (storedSearches) {
       const parsedSearches = JSON.parse(storedSearches);
-      console.log(parsedSearches);
       dispatch(setStoredSearches(parsedSearches));
     }
   } catch (error) {

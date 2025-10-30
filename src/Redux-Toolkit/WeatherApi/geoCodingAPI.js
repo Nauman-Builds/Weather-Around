@@ -21,7 +21,8 @@ export const getCityNameByCoords = createApi({
           component.types.includes('district'),
         );
         const formatted_address = result.formatted_address || '';
-
+        
+        console.log(result?.formatted_address)
         return {
           formatted_address,
           city: city?.short_name || '',

@@ -1,11 +1,10 @@
-import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 import {getTitleByVisibility} from '../../Utils/WeatherConditions';
@@ -14,7 +13,7 @@ const VisibilityCard = ({visibility}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="eye" size={20} color={ThemeColors.Gray} />
+        <Ionicons name="eye-outline" size={20} color={ThemeColors.Gray} />
         <Text style={styles.label}>VISIBILITY</Text>
       </View>
       <Text style={styles.level}>{visibility?.toFixed(1)}km</Text>

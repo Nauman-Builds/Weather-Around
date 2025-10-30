@@ -5,7 +5,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 import {getTitleByTemp} from '../../Utils/WeatherConditions';
@@ -14,7 +14,7 @@ const FeelsLikeCard = ({feelsLike}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="temperature-low" size={18} color={ThemeColors.Gray} />
+        <Ionicons name="thermometer-outline" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>FEELS LIKE</Text>
       </View>
       <Text style={styles.level}>{feelsLike?.toFixed(0) || 0}°</Text>

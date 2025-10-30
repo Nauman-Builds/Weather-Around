@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const transformWeatherResponse = res => ({
   main: res?.main || {},
@@ -22,17 +22,17 @@ export const getWeatherByOpenWeather = createApi({
       transformResponse: transformWeatherResponse,
     }),
     getWeatherByCoords: builder.query({
-      query: ({lat, lon}) =>
+      query: ({ lat, lon }) =>
         `weather?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: transformWeatherResponse,
     }),
     getForecastByCoords: builder.query({
-      query: ({lat, lon}) =>
+      query: ({ lat, lon }) =>
         `forecast?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
-      transformResponse: res => console.log(res?.list),
+      transformResponse: res => res?.list,
     }),
     getAirQualityByCoords: builder.query({
-      query: ({lat, lon}) =>
+      query: ({ lat, lon }) =>
         `/air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.OPEN_WEATHER_API_KEY}`,
       transformResponse: res => res?.list[0]?.main,
     }),

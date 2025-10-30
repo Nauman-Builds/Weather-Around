@@ -6,7 +6,7 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 import {getIndicatorByAQI, getTitleByUV} from '../../Utils/WeatherConditions';
@@ -15,7 +15,7 @@ const UVIndexCard = ({UVIndex}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="sunny-sharp" size={18} color={ThemeColors.Gray} />
+        <Ionicons name="sunny-sharp" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>UV INDEX</Text>
       </View>
       <Text style={styles.level}>{UVIndex}</Text>

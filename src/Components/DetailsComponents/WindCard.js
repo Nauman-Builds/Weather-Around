@@ -1,6 +1,5 @@
-import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import Images from '../../Assets/Images';
 import {
   responsiveFontSize,
@@ -14,7 +13,7 @@ const WindsCard = ({speed}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="wind" size={18} color={ThemeColors.Gray} />
+        <Ionicons name="navigate-outline" size={17} color={ThemeColors.Gray} />
         <Text style={styles.label}>WIND</Text>
       </View>
       <Image source={Images.WindMeter} style={styles.sunriseImage} />

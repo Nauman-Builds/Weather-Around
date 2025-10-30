@@ -33,6 +33,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+.kotlin/
 
 # node.js
 #
@@ -75,3 +76,4 @@ yarn-error.log
 
 #Secure Keys
 .env
+android/app/google-services.json

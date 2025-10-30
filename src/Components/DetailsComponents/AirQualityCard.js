@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import ThemeColors from '../../Utils/Colors';
 import {
   responsiveFontSize,
@@ -15,7 +15,7 @@ const AirQualityCard = ({CurrentAirQuality}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icons name="dots-hexagon" size={18} color={ThemeColors.Gray} />
+        <Ionicons name="logo-apple-ar" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>AIR QUALITY</Text>
       </View>
       <Text style={styles.riskLevel}>{`${CurrentAirQuality} ${getTitleByAQI(

@@ -1,6 +1,5 @@
-import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import Images from '../../Assets/Images';
 import Fonts from '../../Utils/Fonts';
 import ThemeColors from '../../Utils/Colors';
@@ -15,7 +14,7 @@ const SunriseSunsetCard = ({sunrise, sunset}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="sunrise" size={18} color={ThemeColors.Gray} />
+        <Ionicons name="sunny-outline" size={18} color={ThemeColors.Gray} />
         <Text style={styles.label}>SUNRISE</Text>
       </View>
       <Text style={styles.time}>{convertUnixToTime(sunrise)}</Text>

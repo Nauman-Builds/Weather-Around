@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {useSelector} from 'react-redux';
@@ -20,8 +20,10 @@ import {
 } from '../../Redux-Toolkit/CurrentWeatherSlice';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import Payment from '../../Components/PaymentComponent';
+import ShareModal from '../../Components/Common/ShareModal';
 
 const DetailScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const route = useRoute();
   const navigation = useNavigation();
 
@@ -34,7 +36,10 @@ const DetailScreen = () => {
   const cityName = navWeatherData?.city || reduxCityName;
   const weatherData = navWeatherData || reduxWeatherData;
 
-  console.log(navWeatherData);
+  const shareData = `Current weather in ${cityName}:
+  - Temperature: ${weatherData?.currentConditions?.temp?.toFixed(0)}°
+  - Condition: ${weatherData?.currentConditions?.conditions}
+  - Air Quality: ${airQualityData?.aqi || 0}`;
 
   return (
     <LinearGradient
@@ -45,6 +50,8 @@ const DetailScreen = () => {
       <Header
         Title={'Weather Details'}
         backButtonPress={() => navigation.navigate('Home')}
+        shareButton={true}
+        onPress={() => setModalVisible(true)}
       />
       <ScrollView
         style={{borderRadius: 10}}
@@ -80,6 +87,11 @@ const DetailScreen = () => {
           <PressureCard pressure={weatherData?.currentConditions?.pressure} />
         </View>
       </ScrollView>
+      <ShareModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        shareData={shareData}
+      />
     </LinearGradient>
   );
 };

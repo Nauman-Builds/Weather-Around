@@ -1,9 +1,13 @@
-import messaging from '@react-native-firebase/messaging';
-import notifee, {EventType} from '@notifee/react-native';
-import {onCloudNotification} from './NotificationBar';
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, onMessage } from '@react-native-firebase/messaging';
+import notifee, { EventType } from '@notifee/react-native';
+import { onCloudNotification } from './NotificationBar';
 
 export const setupFirebaseForegroundHandler = () => {
-  const unsubscribe = messaging().onMessage(async remoteMessage => {
+  const app = getApp();
+  const messaging = getMessaging(app);
+
+  const unsubscribe = onMessage(messaging, async remoteMessage => {
     console.log('FCM Message received in the foreground:', remoteMessage);
     onCloudNotification(remoteMessage?.notification);
   });
@@ -12,8 +16,8 @@ export const setupFirebaseForegroundHandler = () => {
 };
 
 export const setupNotifeeForegroundHandler = () => {
-  const unsubscribe = notifee.onForegroundEvent(({type, detail}) => {
-    const {notification} = detail;
+  const unsubscribe = notifee.onForegroundEvent(({ type, detail }) => {
+    const { notification } = detail;
 
     switch (type) {
       case EventType.DISMISSED:

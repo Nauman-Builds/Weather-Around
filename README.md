@@ -1,79 +1,124 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🌼 Weather Around
 
-# Getting Started
+**Weather Around** is a beautiful and responsive **React Native** application that offers users **real-time weather information** for any location.  
+Users can view detailed weather data for their **current location** or **search for weather conditions** in cities around the world.  
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+---
 
-## Step 1: Start the Metro Server
+## 🌞 Overview
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+The app integrates advanced APIs, modern UI/UX, and powerful state management tools to deliver an engaging and seamless experience.  
+Built with **React Native**, **Redux Toolkit**, and **RTK Query**, it ensures smooth performance across Android and iOS platforms.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+---
+
+## 🚀 Features
+
+### 🌐 API Integration
+- Fetches **real-time weather data** from [OpenWeather](https://openweathermap.org/api) or [AccuWeather](https://developer.accuweather.com/).
+- Uses **RTK Query** (Redux Toolkit) for efficient and optimized API handling.
+- Minimizes redundant network calls by caching responses globally.
+
+### 🔍 Recent Searches
+- Stores the **last three searched cities** locally using `AsyncStorage`.
+- Offers quick access to recently viewed locations for convenience.
+
+### 📍 Geolocation
+- Automatically detects the **user’s current location** using the device’s GPS.
+- Displays live and accurate weather information for the detected area.
+
+### 🔔 Push Notifications
+- Integrated with **Firebase Cloud Messaging (FCM)** for real-time notifications.
+- Notifies users about **severe weather alerts**, **hourly updates**, and **temperature changes**.
+- Utilizes **Notifee** for advanced notification customization (optional).
+
+### 🎨 Custom Theme and Styling
+- Features a **modern and minimal UI** with **gradient backgrounds** and **custom fonts**.
+- Uses a **consistent color palette** for a visually appealing and cohesive experience.
+
+### 📱 Responsive Design
+- Fully optimized for both **Android** and **iOS** devices.
+- Supports **portrait** and **landscape** orientations, adapting dynamically to screen sizes.
+
+### 🧭 State Management with Redux Toolkit
+- Centralized state management for **weather data**, **user preferences**, and **API cache**.
+- Ensures **high performance** and **predictable behavior** across the app.
+
+### 💳 Payment Integration (Premium Features)
+- Supports **in-app purchases** or **subscription models** for premium weather features.
+- Allows users to **remove ads**, **unlock detailed forecasts**, or **access exclusive insights**.
+
+### 💾 Local Storage with AsyncStorage
+- Saves:
+  - User preferences (theme, units, etc.)
+  - Last fetched weather data (for offline access)
+  - Recent search history
+- Ensures basic functionality even without an internet connection.
+
+### ⚠️ Error Handling & Alerts
+- Displays user-friendly alerts for:
+  - Invalid city names
+  - Network or API failures
+  - Missing GPS permissions
+
+### 🌈 Weather Vector Icons
+- Includes dynamic weather icons from libraries like **Ionicons**.
+- Icons adjust automatically based on current weather conditions.
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Tools / Libraries |
+|-----------|------------------|
+| **Framework** | React Native |
+| **State Management** | Redux Toolkit, RTK Query |
+| **API** | OpenWeather / AccuWeather |
+| **Notifications** | Firebase Cloud Messaging (FCM), Notifee |
+| **Storage** | AsyncStorage |
+| **Geolocation** | @react-native-community/geolocation  |
+| **Payment Integration** | Stripe / In-App Purchases |
+| **Icons** | Ionicons |
+| **Navigation** | React Navigation v7 |
+
+---
+
+## ⚙️ Setup
 
 ```bash
-# using npm
-npm start
+# Clone the repository
+git clone https://github.com/Nauman-Builds/WeatherApp.git
 
-# OR using Yarn
-yarn start
-```
+# Navigate to project directory
+cd WeatherApp
 
-## Step 2: Start your Application
+# Install dependencies
+yarn install
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
+# Run the app
 yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+---
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## 🧑‍💻 Author
 
-## Step 3: Modifying your App
+**[Muhammad Nauman Zafar]**  
+Mobile Application Developer | React Native | Firebase | IoT Sensors | Google Maps SDK | Typescript | Tailwind CSS | Android Native | iOS | JavaScript ES6 
 
-Now that you have successfully run the app, let's modify it.
+**Experience:** 3 Years in Mobile App Development  
+📧 Contact: [nauman.zafar.123@gmail.com] 
+🔗 [GitHub](https://github.com/Nauman-Builds)
+🔗 [Linkedin](https://linkedin.com/in/nauman-tech/)
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+---
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## 📝 License
+  
+This project is for **educational and portfolio purposes only**.
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+> “Stay informed, stay prepared — Weather Around keeps you one step ahead of the storm.” 🌦️

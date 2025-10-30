@@ -1,23 +1,23 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {TextInput, StyleSheet, FlatList, View, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { TextInput, StyleSheet, FlatList, View, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import WeatherCard from '../../Components/SearchComponents/WeatherCard';
 import {
   addSearch,
   loadStoredSearches,
   selectLastSearches,
 } from '../../Redux-Toolkit/SearchWeatherSlice';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import {
   responsiveHeight as rh,
   responsiveWidth as rw,
   responsiveFontSize as rf,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Header from '../../Components/Common/Header';
 import Fonts from '../../Utils/Fonts';
 import ThemeColors from '../../Utils/Colors';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchWeatherScreen = () => {
   const [searchLocation, setSearchLocation] = useState('');
@@ -32,13 +32,13 @@ const SearchWeatherScreen = () => {
   const handleSearch = useCallback(() => {
     const trimmedLocation = searchLocation.trim();
     if (trimmedLocation !== '') {
-      dispatch(addSearch({location: trimmedLocation}));
+      dispatch(addSearch({ location: trimmedLocation }));
       setSearchLocation('');
     }
   }, [searchLocation, dispatch]);
 
   const renderItem = useCallback(
-    ({item}) => <WeatherCard location={item?.location} />,
+    ({ item }) => <WeatherCard location={item?.location} />,
     [],
   );
 
@@ -46,14 +46,20 @@ const SearchWeatherScreen = () => {
     <LinearGradient
       colors={['#FF69B4', '#5E1B80', '#2C0F5D', '#612FAB', '#3e8ce8']} //'#8A2BE2', '#3e8ce8', '#fd8a96', '#FF69B4'
       style={styles.container}
-      start={{x: -0.55, y: 0.15}}
-      end={{x: 0.35, y: 1.15}}>
+      start={{ x: -0.65, y: 0.25 }}
+      end={{ x: 0.35, y: 1.15 }}
+    >
       <Header
         Title={'Weather'}
         backButtonPress={() => navigation.navigate('Home')}
       />
       <View style={styles.searchContainer}>
-        <Icon name="search" size={20} color="#fff" style={styles.searchIcon} />
+        <Ionicons
+          name="search"
+          size={20}
+          color="#fff"
+          style={styles.searchIcon}
+        />
         <TextInput
           placeholder="Search for a city or airport"
           placeholderTextColor="#9E9E9E"
@@ -69,8 +75,9 @@ const SearchWeatherScreen = () => {
       <View
         style={[
           styles.searchResultsContainer,
-          {marginVertical: recentSearches.length === 0 ? 18 : 12},
-        ]}>
+          { marginVertical: recentSearches.length === 0 ? 18 : 12 },
+        ]}
+      >
         {recentSearches.length === 0 ? (
           <Text style={styles.placeholderText}>
             No search history available

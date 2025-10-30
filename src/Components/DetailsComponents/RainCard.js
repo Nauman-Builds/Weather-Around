@@ -1,11 +1,10 @@
-import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import Icon from 'react-native-vector-icons/Fontisto';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import ThemeColors from '../../Utils/Colors';
 import Fonts from '../../Utils/Fonts';
 
@@ -13,7 +12,7 @@ const RainCard = ({precipitation, rain}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="blood-drop" size={17} color={ThemeColors.Gray} />
+        <Ionicons name="umbrella-outline" size={17} color={ThemeColors.Gray} />
         <Text style={styles.label}>RAINFALL</Text>
       </View>
       <Text style={styles.level1}>

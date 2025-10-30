@@ -1,12 +1,11 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-const Header = ({Title, backButtonPress}) => {
+const Header = ({Title, backButtonPress, shareButton, onPress}) => {
   return (
     <View style={styles.header}>
       <View style={styles.headerContainer}>
@@ -14,12 +13,21 @@ const Header = ({Title, backButtonPress}) => {
           accessible
           accessibilityLabel="Go Back"
           onPress={backButtonPress}>
-          <Icon name="chevron-back-sharp" size={31} color="#fff" />
+          <Ionicons name="chevron-back-sharp" size={31} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.headerText}>{Title}</Text>
       </View>
-      <TouchableOpacity accessible accessibilityLabel="More Options">
-        <Icon name="ellipsis-horizontal-circle" size={33} color="#fff" />
+      <TouchableOpacity
+        accessible
+        accessibilityLabel="More Options"
+        onPress={onPress}>
+        <Ionicons
+          name={
+            shareButton ? 'share-social-outline' : 'ellipsis-horizontal-circle'
+          }
+          size={shareButton ? 29 : 33}
+          color="#fff"
+        />
       </TouchableOpacity>
     </View>
   );
@@ -29,7 +37,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    width: responsiveWidth(90),
+    width: responsiveWidth(89.5),
     paddingVertical: 9,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -38,7 +46,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 9,
   },
   headerText: {
     color: '#fff',

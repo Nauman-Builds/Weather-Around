@@ -1,7 +1,5 @@
-import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icoon from 'react-native-vector-icons/FontAwesome6';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -15,16 +13,16 @@ const PressureCard = ({pressure}) => {
   return (
     <View style={styles.container}>
       <View style={styles.sunriseCont}>
-        <Icon name="gauge" size={20} color={ThemeColors.Gray} />
+        <Ionicons name="speedometer-outline" size={20} color={ThemeColors.Gray} />
         <Text style={styles.label}>PRESSURE</Text>
       </View>
       <Image source={Icons.pressure} style={styles.sunriseImage} />
       <View style={styles.PressureCont}>
-        <Icoon
+        <Ionicons
           name={
-            pressure > 1000 ? 'arrow-up-wide-short' : 'arrow-down-wide-short'
+            pressure > 1000 ? 'arrow-up-outline' : 'arrow-down-outline'
           }
-          size={20}
+          size={25}
           color={ThemeColors.Gray}
         />
         <Text style={styles.windSpeed}>{pressure}mb</Text>
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
   PressureCont: {
     width: responsiveWidth(28),
     position: 'absolute',
-    top: responsiveHeight(9),
+    top: responsiveHeight(8.5),
     alignItems: 'center',
     gap: 2,
   },

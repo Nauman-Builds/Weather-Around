@@ -1,6 +1,7 @@
-import {useEffect, useCallback} from 'react';
-import messaging from '@react-native-firebase/messaging';
-import {LogLevel, OneSignal} from 'react-native-onesignal';
+import { useEffect, useCallback } from 'react';
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, getToken } from '@react-native-firebase/messaging';
+import { LogLevel, OneSignal } from 'react-native-onesignal';
 import {
   setupFirebaseForegroundHandler,
   setupNotifeeForegroundHandler,
@@ -21,8 +22,11 @@ const NotificationConfig = () => {
   }, []);
 
   const getDeviceToken = useCallback(async () => {
+    const app = getApp();
+    const messaging = getMessaging(app);
+
     try {
-      const token = await messaging().getToken();
+      const token = await getToken(messaging);
       console.log('FCM Device Token:', token);
     } catch (error) {
       console.error('Failed to get FCM device token:', error);
