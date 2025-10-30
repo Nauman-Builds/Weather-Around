@@ -87,10 +87,10 @@ Built with **React Native**, **Redux Toolkit**, and **RTK Query**, it ensures sm
 
 ```bash
 # Clone the repository
-git clone https://github.com/Nauman-Builds/WeatherApp.git
+git clone https://github.com/Nauman-Builds/Weather-Around.git
 
 # Navigate to project directory
-cd WeatherApp
+cd Weather-Around
 
 # Install dependencies
 yarn install
